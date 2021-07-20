@@ -1,10 +1,30 @@
-import {Flight} from '../models/flight.js'
+import {Flight, Ticket} from '../models/flight.js'
+
 
 export{
     newFlight as new,
     create,
-    index
+    index,
+    createTicket,
+    show
     //redirect
+}
+
+function show(req,res){
+    Flight.findById(req.params.id, function(err, flight){
+        res.render('flights/show', {
+            title: 'Flight Detail',
+            flight: flight
+        })
+    })
+}
+function createTicket(req,res){
+    Flight.findById(req.params.id, function(err,flight){
+        flight.tickets.push(req.body)
+        flight.save(function(err){
+            res.redirect(`/flights/${flight._id}`)
+        })
+    })
 }
 
 function newFlight(req, res){

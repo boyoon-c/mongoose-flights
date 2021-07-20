@@ -10,9 +10,5 @@ router.get('/', flightsCtrl.index)
 router.get('/new', flightsCtrl.new)
 //router.get('/', flightsCtrl.redirect)
 router.post('/', flightsCtrl.create)
-
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource')
-// })
-
+router.get('/:id', flightsCtrl.show)
+router.post('/:id/tickets', flightsCtrl.createTicket)

@@ -1,5 +1,4 @@
-import {Flight, Ticket} from '../models/flight.js'
-
+import {Flight} from '../models/flight.js'
 
 export{
     newFlight as new,

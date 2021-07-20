@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 export{
     Flight,
-    Ticket
+    //Ticket
 }
 
 const Schema = mongoose.Schema
@@ -45,14 +45,12 @@ const flightSchema = new Schema({
         }
         
     },
-    tickets: {
-        type: [ticketSchema]
-    }
+    tickets: [ticketSchema]
 }, {
     timestamps: true
 })
 
 
 
-const Ticket=mongoose.model('Ticket', ticketSchema)
+//const Ticket=mongoose.model('Ticket', ticketSchema)
 const Flight=mongoose.model('Flight', flightSchema)

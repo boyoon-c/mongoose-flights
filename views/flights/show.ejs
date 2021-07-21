@@ -18,11 +18,14 @@
         <div>Flight Number: <%= flight.flightNo %> </div>
         <div>Departure: <%= flight.departs %> </div>
         <div>Destination: 
+            <ul>
+                <%- flight.destination.map(d=>`<li>${d.airport}</li>`).join('')%>
+              </ul>
             <form action="/flights/<%=flight._id%>/destinations" method="POST">
                 <select name="destinationId">
                     <%- destinations.map(d =>`<option value="${d._id}">${d.airport}</option>`) %> 
                 </select>
-            
+                <button type="submit">Add to destination</button>
             </form>
     </section>
     <section>

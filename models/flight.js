@@ -45,12 +45,12 @@ const flightSchema = new Schema({
         }
         
     },
-    tickets: [ticketSchema]
+    tickets: [ticketSchema],
+    destination: {type: Schema.Types.ObjectId, ref:'Destination'}
 }, {
     timestamps: true
 })
 
 
 
-//const Ticket=mongoose.model('Ticket', ticketSchema)
 const Flight=mongoose.model('Flight', flightSchema)

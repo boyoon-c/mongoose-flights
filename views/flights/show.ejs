@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../stylesheets/style.css">
     <a href="/flights/new">Add Flights</a>
     <a href="/flights">All Flights</a>
+    <a href="/destinations/new">Add Destinations</a>
+
 </head>
 <body>
     <h1><%=title%></h1>
@@ -15,6 +17,13 @@
         <div>Airport: <%= flight.airport  %> </div>
         <div>Flight Number: <%= flight.flightNo %> </div>
         <div>Departure: <%= flight.departs %> </div>
+        <div>Destination: 
+            <form action="/flights/<%=flight._id%>/destinations" method="POST">
+                <select name="destinationId">
+                    <%- destinations.map(d =>`<option value="${d._id}">${d.airport}</option>`) %> 
+                </select>
+            
+            </form>
     </section>
     <section>
         <h2> Ticket Information</h2>
@@ -41,7 +50,7 @@
         <h3>No ticket information</h3>
     <% } %>   
         <h2>Add a Ticket</h2>
-        <form action="/flights/<%=flight._id%>/tickets"
+        <form action="/flights/<%=flight._id%>"
             method="POST">
            <label>Seat:</label> 
            <input type="text" name="seat" required pattern="[A-F][1-9]\d?">

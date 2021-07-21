@@ -1,19 +1,35 @@
 import {Flight} from '../models/flight.js'
+import {Destination} from '../models/destination.js'
 
 export{
     newFlight as new,
     create,
     index,
     createTicket,
-    show
+    show,
+    addToDestination
     //redirect
 }
 
+function addToDestination(req,res){
+    Flight.findById(req.params.id, function(err,flight){
+        flight.destination.push(req.body.destinationId)
+        flight.save(function(err){
+            res.redirect(`/flights/${flight._id}`)
+        })
+    })
+}
+
 function show(req,res){
-    Flight.findById(req.params.id, function(err, flight){
-        res.render('flights/show', {
+    Flight.findById(req.params.id).
+    populate('destination').exec(function(err, flight){
+        Destination.find({_id: {$nin: flight.destination}}, function(err, destinations){
+            res.render('flights/show', {
             title: 'Flight Detail',
-            flight: flight
+            flight: flight,
+            destinations: destinations
+        })
+        
         })
     })
 }
@@ -42,7 +58,7 @@ function create(req,res){
     const Doesthiswork = new Flight(req.body)
     Doesthiswork.save(function(err){
         if (err) return res.redirect('/flights/new')
-        res.redirect('/flights')
+        res.redirect(`/flights/${flight._id}`)
     })
  }
 

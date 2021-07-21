@@ -21,7 +21,10 @@
     <h1>Destination List</h1>
     
     <h2><% destinations.forEach(function(destination){ %></h2>
-    <div><%= destination.airport %> </div>
+    <div><%= destination.airport %> 
+        <form action="/destinations/<%= destination._id %>?_method=DELETE" method="POST"><button>DELETE</button></form>
+    </div>
+
     <% }) %>  
 
 </body>

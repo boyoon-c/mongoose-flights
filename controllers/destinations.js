@@ -3,7 +3,15 @@ import { Destination } from '../models/destination.js'
 export {
     newDestination as new,
     create,
-    index
+    index, 
+    deleteDestination as delete
+}
+
+
+function deleteDestination(req,res){
+    Destination.findByIdAndDelete(req.params.id, function(err, destination){
+        res.redirect('/destinations')
+    })
 }
 
 function index(req,res){
